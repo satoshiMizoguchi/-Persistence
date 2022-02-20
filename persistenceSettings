@@ -1,0 +1,49 @@
+application.properties
+
+spring.h2.console.enabled = true
+spring.datasource.driver-class-name = org.h2.Driver
+spring.datasource.url = jdbc:h2:~/webappdb/database
+spring.datasource.username = sa
+spring.datasource.password = sa
+
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:file:/tmp/testdb
+    username: sa
+    password:
+これでApp.javaを実行したタイミングでtestdb.h2.dbというファイルが作成されます。
+こうしておくとアプリケーションを終了してもデータが残るようになります。
+
+ファイルを利用して永続化する場合
+
+spring.datasource.url=jdbc:h2:/springboot-h2-sample/h2-data/h2.db;DB_CLOSE_ON_EXIT=TRUE;MODE=PostgreSQL
+※ 「/springboot-h2-sample/h2-data/h2.db」は保存先のファイルを指定します。
+
+
+DI例
+Spring Boot DevTools
+Lombok
+検証
+Spring Data JPA
+H2 Database
+Thymeleaf
+Spring Web
+
+h2-console
+Driver Class org.h2.Driver
+JDBC URL jdbc:h2:～/webappdb/database
+→ホームディレクトリに「webappdb」というディレクトリが作られ、その中に
+「database.v.db」というファイルが作られその中にデータが保存される
+
+User Name sa
+Password sa or 空欄
+
+connect出来たらテーブル構造を入力 create table
+念のためschema.sqlにもif not existsでどうようの文を書いておく
+
+Entityクラス
+
+クラス名はテーブルの名前をパスカルケースにしたもの、フィールド名はカラム名をキャメルケースにしたものにします。
+テーブル名やカラム名にアンダースコアがある場合はそこを区切りにして名前をつければ良いです。
+（例えばAUTHOR_NAMEというカラムがあった場合、対応するフィールドはauthorNameになります）
